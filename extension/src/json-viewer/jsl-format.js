@@ -64,15 +64,14 @@ jsl.format = (function () {
             case '[':
                 if (!inString) {
                     if (indentCStyle) newJson += "\n" + repeat(tab, indentLevel);
-                    if(currentChar === "["){
-                        if(showArraySize){
-                            var arraySize = getSizeOfArray(json,i);
-                            if(arraySize !== null){
-                                newJson += "Array[" + arraySize + "]";
-                            }
+                    newJson += currentChar;
+
+                    if(currentChar === "[" && showArraySize){
+                        var arraySize = getSizeOfArray(json,i);
+                        if(arraySize !== null){
+                            newJson += " /* " + arraySize + " */";
                         }
                     }
-                    newJson += currentChar;
                     
                     newJson +=  "\n" + repeat(tab, indentLevel + 1);
                     indentLevel += 1;
